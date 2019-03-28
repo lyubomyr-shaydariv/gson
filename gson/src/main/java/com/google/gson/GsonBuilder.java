@@ -108,7 +108,7 @@ public final class GsonBuilder {
    * Constructs a GsonBuilder instance from a Gson instance. The newly constructed GsonBuilder
    * has the same configuration as the previously built Gson instance.
    *
-   * @param gson the gson instance whose configuration should by applied to a new GsonBuilder.
+   * @param gson the gson instance whose configuration should be applied to a new GsonBuilder.
    */
   GsonBuilder(Gson gson) {
     this.excluder = gson.excluder;
