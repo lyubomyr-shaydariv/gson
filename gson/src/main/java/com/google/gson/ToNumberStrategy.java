@@ -28,11 +28,10 @@ import com.google.gson.stream.JsonReader;
  * <ul>
  * <li>{@link Double} values are returned for JSON numbers if the deserialization type is declared as
  * {@link Object};</li>
- * <li>{@link com.google.gson.internal.LazilyParsedNumber} values are returned if the deserialization type
- * is declared as {@link Number}.</li>
+ * <li>Lazily parsed number values are returned if the deserialization type is declared as {@link Number}.</li>
  * </ul>
  *
- * <p>For historical reasons, Gson does not support arbitrary-length numbers deserialization as its stated in
+ * <p>For historical reasons, Gson does not support deserialization of arbitrary-length numbers as its stated in
  * <a href="https://tools.ietf.org/html/rfc8259#section-6">RFC 8259</a> for {@link Object} and {@link Number}
  * causing some data loss while deserialization:</p>
  *
@@ -50,7 +49,7 @@ import com.google.gson.stream.JsonReader;
  *   for numeric magnitude and precision than is widely available.
  * </pre>
  *
- * <p>For example, {@link ToNumberPolicy#LONG_OR_DOUBLE} and {@link ToNumberPolicy#BIG_DECIMAL} to overcome
+ * <p>Use for example, {@link ToNumberPolicy#LONG_OR_DOUBLE} or {@link ToNumberPolicy#BIG_DECIMAL} to overcome
  * possible data loss.</p>
  *
  * @see ToNumberPolicy
@@ -67,5 +66,5 @@ public interface ToNumberStrategy {
    * @return number read from the JSON reader.
    * @throws IOException
    */
-  public Number toNumber(JsonReader in) throws IOException;
+  public Number readNumber(JsonReader in) throws IOException;
 }

@@ -328,12 +328,11 @@ public final class GsonBuilder {
   }
 
   /**
-   * Configures Gson to apply a specific number strategy during deserialization for {@link Object}.
+   * Configures Gson to apply a specific number strategy during deserialization of {@link Object}.
    *
    * @param objectToNumberStrategy the actual object-to-number strategy
    * @return a reference to this {@code GsonBuilder} object to fulfill the "Builder" pattern
-   *
-   * @see ToNumberPolicy#DOUBLE
+   * @see ToNumberPolicy#DOUBLE The default object to number strategy
    */
   public GsonBuilder setObjectToNumberStrategy(ToNumberStrategy objectToNumberStrategy) {
     this.objectToNumberStrategy = objectToNumberStrategy;
@@ -341,12 +340,11 @@ public final class GsonBuilder {
   }
 
   /**
-   * Configures Gson to apply a specific number strategy during deserialization for {@link Number}.
+   * Configures Gson to apply a specific number strategy during deserialization of {@link Number}.
    *
    * @param numberToNumberStrategy the actual number-to-number strategy
    * @return a reference to this {@code GsonBuilder} object to fulfill the "Builder" pattern
-   *
-   * @see ToNumberPolicy#LAZILY_PARSED_NUMBER
+   * @see ToNumberPolicy#LAZILY_PARSED_NUMBER The default number to number strategy
    */
   public GsonBuilder setNumberToNumberStrategy(ToNumberStrategy numberToNumberStrategy) {
     this.numberToNumberStrategy = numberToNumberStrategy;

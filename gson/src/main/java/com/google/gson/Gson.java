@@ -388,7 +388,7 @@ public final class Gson {
           return null;
         case NUMBER:
         case STRING:
-          return numberToNumberStrategy.toNumber(in);
+          return numberToNumberStrategy.readNumber(in);
         default:
           throw new JsonSyntaxException("Expecting number, got: " + jsonToken);
         }

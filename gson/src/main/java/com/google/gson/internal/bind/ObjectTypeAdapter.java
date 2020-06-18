@@ -88,7 +88,7 @@ public final class ObjectTypeAdapter extends TypeAdapter<Object> {
       return in.nextString();
 
     case NUMBER:
-      return toNumberStrategy.toNumber(in);
+      return toNumberStrategy.readNumber(in);
 
     case BOOLEAN:
       return in.nextBoolean();

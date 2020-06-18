@@ -34,23 +34,22 @@ public enum ToNumberPolicy implements ToNumberStrategy {
 
   /**
    * Using this policy will ensure that numbers will be read as {@link Double} values.
-   * This is the default strategy used during deserialization numbers as {@link Object}
-   * using {@link com.google.gson.internal.bind.ObjectTypeAdapter} in earlier versions
-   * of Gson.
+   * This is the default strategy used during deserialization of numbers as {@link Object}
+   * in earlier versions of Gson.
    */
   DOUBLE {
-    @Override public Double toNumber(JsonReader in) throws IOException {
+    @Override public Double readNumber(JsonReader in) throws IOException {
       return in.nextDouble();
     }
   },
 
   /**
-   * Using this policy will ensure that numbers will be read as {@link LazilyParsedNumber}
-   * values. This is the default strategy using during deserialization numbers as
-   * {@link Number} using {@link com.google.gson.internal.bind.TypeAdapters#NUMBER}.
+   * Using this policy will ensure that numbers will be read as a lazily parsed number backed
+   * by a string. This is the default strategy used during deserialization of numbers as
+   * {@link Number}.
    */
   LAZILY_PARSED_NUMBER {
-    @Override public LazilyParsedNumber toNumber(JsonReader in) throws IOException {
+    @Override public Number readNumber(JsonReader in) throws IOException {
       return new LazilyParsedNumber(in.nextString());
     }
   },
@@ -64,19 +63,19 @@ public enum ToNumberPolicy implements ToNumberStrategy {
    * ({@link Double#isNaN()}) value, {@link MalformedJsonException} is thrown.
    */
   LONG_OR_DOUBLE {
-    @Override public Number toNumber(JsonReader in) throws IOException, JsonParseException {
+    @Override public Number readNumber(JsonReader in) throws IOException, JsonParseException {
       String value = in.nextString();
       try {
         return Long.parseLong(value);
-      } catch ( NumberFormatException longEx ) {
+      } catch (NumberFormatException longE) {
         try {
-          final Double d = Double.valueOf(value);
-          if (d.isInfinite() || d.isNaN()) {
+          Double d = Double.valueOf(value);
+          if ((d.isInfinite() || d.isNaN()) && !in.isLenient()) {
             throw new MalformedJsonException("JSON forbids NaN and infinities: " + d + in);
           }
           return d;
-        } catch ( NumberFormatException doubleEx ) {
-          throw new JsonParseException("Cannot parse " + value);
+        } catch (NumberFormatException doubleE) {
+          throw new JsonParseException("Cannot parse " + value, doubleE);
         }
       }
     }
@@ -87,8 +86,13 @@ public enum ToNumberPolicy implements ToNumberStrategy {
    * using {@link BigDecimal}.
    */
   BIG_DECIMAL {
-    @Override public BigDecimal toNumber(JsonReader in) throws IOException {
-      return new BigDecimal(in.nextString());
+    @Override public BigDecimal readNumber(JsonReader in) throws IOException {
+      String value = in.nextString();
+      try {
+        return new BigDecimal(value);
+      } catch (NumberFormatException e) {
+        throw new JsonParseException("Cannot parse " + value, e);
+      }
     }
   }
 
