@@ -368,7 +368,7 @@ public final class Gson {
   }
 
   private static TypeAdapterFactory objectAdapterFactory(ToNumberStrategy objectToNumberStrategy) {
-    if (objectToNumberStrategy == ToNumberPolicy.DOUBLE ) {
+    if (objectToNumberStrategy == ToNumberPolicy.DOUBLE) {
       return ObjectTypeAdapter.FACTORY;
     }
     return ObjectTypeAdapter.newFactory(objectToNumberStrategy);

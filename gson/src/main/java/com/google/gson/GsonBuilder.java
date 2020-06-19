@@ -332,7 +332,7 @@ public final class GsonBuilder {
    *
    * @param objectToNumberStrategy the actual object-to-number strategy
    * @return a reference to this {@code GsonBuilder} object to fulfill the "Builder" pattern
-   * @see ToNumberPolicy#DOUBLE The default object to number strategy
+   * @see ToNumberPolicy#DOUBLE The default object-to-number strategy
    */
   public GsonBuilder setObjectToNumberStrategy(ToNumberStrategy objectToNumberStrategy) {
     this.objectToNumberStrategy = objectToNumberStrategy;
@@ -344,7 +344,7 @@ public final class GsonBuilder {
    *
    * @param numberToNumberStrategy the actual number-to-number strategy
    * @return a reference to this {@code GsonBuilder} object to fulfill the "Builder" pattern
-   * @see ToNumberPolicy#LAZILY_PARSED_NUMBER The default number to number strategy
+   * @see ToNumberPolicy#LAZILY_PARSED_NUMBER The default number-to-number strategy
    */
   public GsonBuilder setNumberToNumberStrategy(ToNumberStrategy numberToNumberStrategy) {
     this.numberToNumberStrategy = numberToNumberStrategy;

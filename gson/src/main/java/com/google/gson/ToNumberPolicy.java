@@ -60,7 +60,8 @@ public enum ToNumberPolicy implements ToNumberStrategy {
    * fit the {@link Long} range, or {@link Double} if the JSON number can fit the {@link Double}
    * range and the value cannot be read as {@link Long}. If the parsed double-precision number
    * results in a positive or negative infinity ({@link Double#isInfinite()}) or a NaN
-   * ({@link Double#isNaN()}) value, {@link MalformedJsonException} is thrown.
+   * ({@link Double#isNaN()}) value and the {@code JsonReader} is not {@link JsonReader#isLenient() lenient},
+   * a {@link MalformedJsonException} is thrown.
    */
   LONG_OR_DOUBLE {
     @Override public Number readNumber(JsonReader in) throws IOException, JsonParseException {
