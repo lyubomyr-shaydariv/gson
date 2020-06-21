@@ -24,7 +24,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.MalformedJsonException;
 
 /**
- * An enumeration that defines two standard number reading strategies and a couple of number
+ * An enumeration that defines two standard number reading strategies and a couple of
  * strategies to overcome some historical Gson limitations while deserializing numbers as
  * {@link Object} and {@link Number}.
  *
@@ -34,8 +34,7 @@ public enum ToNumberPolicy implements ToNumberStrategy {
 
   /**
    * Using this policy will ensure that numbers will be read as {@link Double} values.
-   * This is the default strategy used during deserialization of numbers as {@link Object}
-   * in earlier versions of Gson.
+   * This is the default strategy used during deserialization of numbers as {@link Object}.
    */
   DOUBLE {
     @Override public Double readNumber(JsonReader in) throws IOException {
